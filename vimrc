@@ -71,7 +71,11 @@ inoremap <C-Right> <Nop>
 " --- Clipboard (WSL) ---
 " Yank to Windows clipboard using the built-in clip.exe (write-only, but enough)
 if executable('clip.exe')
-  autocmd TextYankPost * call system('clip.exe', @")
+    autocmd TextYankPost * call system('clip.exe', @")
+endif
+" Yank to tmux if inside tmux
+if !empty($TMUX)
+    autocmd TextYankPost * call system('tmux load-buffer -', @")
 endif
 
 " Enable fzf plugin
@@ -87,3 +91,9 @@ inoremap <Left>  <ESC>:echoe "Use h"<CR>
 inoremap <Right> <ESC>:echoe "Use l"<CR>
 inoremap <Up>    <ESC>:echoe "Use k"<CR>
 inoremap <Down>  <ESC>:echoe "Use j"<CR>
+
+" Keep swap files in one place
+if !isdirectory($HOME . '/.vim/swapfiles')
+    call mkdir($HOME . '/.vim/swapfiles', 'p')
+endif
+set directory=~/.vim/swapfiles//

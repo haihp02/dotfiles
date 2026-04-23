@@ -80,4 +80,12 @@ fi
 # -----------------------
 mkdir -p ~/.vim/undodir
 
+# -----------------------
+# Set vim as default git editor 
+# -----------------------
+git config --global core.editor "vim"
+git config --global diff.tool vimdiff
+git config --global merge.tool vimdiff
+git config --global difftool.prompt false
+
 echo "Done."
