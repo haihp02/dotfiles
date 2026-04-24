@@ -36,7 +36,7 @@ if ! command -v vim &> /dev/null; then
   install_vim
 else
   VIM_MAJOR=$(vim --version | head -1 | grep -oP 'Vi IMproved \K[0-9]+')
-  if [ "${VIM_MAJOR:-0}" -lt 8 ]; then
+  if [ "${VIM_MAJOR:-0}" -lt 9 ]; then
     echo "Vim ${VIM_MAJOR} is too old (need 8+), upgrading..."
     install_vim
   else
