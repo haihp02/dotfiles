@@ -19,11 +19,14 @@ ln -sf ~/dotfiles/tmux.conf ~/.tmux.conf
 
 # -----------------------
 # Install / upgrade Vim
-# Requires vim 8+ for native package loading (~/.vim/pack/...) to work.
+# Requires vim 9+ for native package loading (~/.vim/pack/...) to work.
 # -----------------------
 install_vim() {
-  echo "Installing vim..."
+  echo "Installing vim 9..."
   if command -v apt &> /dev/null; then
+    $SUDO apt update
+    $SUDO apt install -y software-properties-common
+    $SUDO add-apt-repository -y ppa:jonathonf/vim
     $SUDO apt update
     $SUDO apt install -y vim
   else
