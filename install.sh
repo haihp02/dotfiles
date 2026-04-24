@@ -76,6 +76,14 @@ if [ ! -d "$HOME/.vim/pack/vendor/start/fzf.vim" ]; then
 fi
 
 # -----------------------
+# Install sonokai colorscheme
+# -----------------------
+if [ ! -d "$HOME/.vim/pack/vendor/start/sonokai" ]; then
+  git clone https://github.com/sainnhe/sonokai.git \
+   ~/.vim/pack/vendor/start/sonokai
+fi
+
+# -----------------------
 # Make sure vim undodir exists
 # -----------------------
 mkdir -p ~/.vim/undodir

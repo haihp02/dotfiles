@@ -87,6 +87,18 @@ command! FilesAll call fzf#vim#files('', {
   \ 'options': $FZF_DEFAULT_OPTS
   \ })
 
+" Tell vim the terminal supports true color (needed for WSL + Windows Terminal)
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors
+" Sonokai Shusia colorscheme
+let g:sonokai_style = 'shusia'
+let g:sonokai_better_performance = 1
+colorscheme sonokai
+" Background transparent
+highlight Normal guibg=NONE ctermbg=NONE
+highlight NonText guibg=NONE ctermbg=NONE
+
 nnoremap <Left>  :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up>    :echoe "Use k"<CR>
