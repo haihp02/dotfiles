@@ -55,7 +55,7 @@ endif
 nmap Q <Nop>
 
 set noerrorbells visualbell t_vb=
-set mouse+=a
+set mouse=
 
 " Disable Ctrl+Arrow — tmux can accidentally send these, causing unexpected
 " actions like deleting lines
@@ -81,7 +81,11 @@ endif
 " Enable fzf plugin
 set rtp+=~/.fzf
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git/*"'
-command! FilesAll call fzf#vim#files('', {'source': 'rg --files --hidden --no-ignore --glob "!.git/*"'})
+let $FZF_DEFAULT_OPTS = '--preview-window=hidden'
+command! FilesAll call fzf#vim#files('', {
+  \ 'source': 'rg --files --hidden --no-ignore --glob "!.git/*"',
+  \ 'options': $FZF_DEFAULT_OPTS
+  \ })
 
 nnoremap <Left>  :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
