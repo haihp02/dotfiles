@@ -23,6 +23,12 @@ set expandtab
 set autoindent
 set smartindent
 
+" Bracketed paste — auto handles paste indentation
+let &t_BE = "\e[?2004h"
+let &t_BD = "\e[?2004l"
+let &t_PS = "\e[200~"
+let &t_PE = "\e[201~"
+
 " Show matching brackets, trailing whitespace, etc.
 set showmatch
 set list
