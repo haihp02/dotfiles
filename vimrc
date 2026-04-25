@@ -80,7 +80,7 @@ endif
 
 " Enable fzf plugin
 set rtp+=~/.fzf
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git/*"'
+let $FZF_DEFAULT_COMMAND = 'rg --files'
 let $FZF_DEFAULT_OPTS = '--preview-window=hidden'
 command! FilesAll call fzf#vim#files('', {
   \ 'source': 'rg --files --hidden --no-ignore --glob "!.git/*"',
