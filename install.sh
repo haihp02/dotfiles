@@ -18,6 +18,28 @@ ln -sf ~/dotfiles/bashrc ~/.bashrc
 ln -sf ~/dotfiles/tmux.conf ~/.tmux.conf
 
 # -----------------------
+# Install tmux 3.6a from official prebuilt binary
+# -----------------------
+TMUX_VERSION="3.6a"
+if ! command -v tmux &> /dev/null || [ "$(tmux -V | grep -oP '\d+\.\d+')" \< "3.3" ]; then
+  echo "Installing tmux ${TMUX_VERSION}..."
+  ARCH=$(uname -m)
+  case "$ARCH" in
+    x86_64)  TMUX_ARCH="linux-x86_64" ;;
+    aarch64) TMUX_ARCH="linux-arm64" ;;
+    *)       echo "⚠️ Unsupported architecture: $ARCH. Please install tmux manually." && exit 1 ;;
+  esac
+  curl -sLo /tmp/tmux.tar.gz "https://github.com/tmux/tmux-builds/releases/download/v${TMUX_VERSION}/tmux-${TMUX_VERSION}-${TMUX_ARCH}.tar.gz"
+  tar -xzf /tmp/tmux.tar.gz -C /tmp
+  $SUDO mv /tmp/tmux /usr/local/bin/tmux
+  hash -r
+  rm -f /tmp/tmux.tar.gz
+  echo "tmux $(tmux -V) installed."
+else
+  echo "tmux $(tmux -V) OK — skipping."
+fi
+
+# -----------------------
 # Install / upgrade Vim
 # Requires vim 9+ for native package loading (~/.vim/pack/...) to work.
 # -----------------------

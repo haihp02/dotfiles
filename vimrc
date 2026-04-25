@@ -74,15 +74,14 @@ inoremap <C-Down>  <Nop>
 inoremap <C-Left>  <Nop>
 inoremap <C-Right> <Nop>
 
-" --- Clipboard (WSL) ---
-" Yank to Windows clipboard using the built-in clip.exe (write-only, but enough)
-if executable('clip.exe')
-    autocmd TextYankPost * call system('clip.exe', @")
-endif
-" Yank to tmux if inside tmux
-if !empty($TMUX)
-    autocmd TextYankPost * call system('tmux load-buffer -', @")
-endif
+" Yank to clipboard via OSC 52
+function! OSC52Yank()
+  let buffer = system('base64 -w0', @")
+  let buffer = substitute(buffer, "\n", "", "g")
+  let buffer = "\e]52;c;" . buffer . "\x07"
+  silent exe "!echo -ne " . shellescape(buffer) . " > /dev/tty"
+endfunction
+autocmd TextYankPost * call OSC52Yank()
 
 " Enable fzf plugin
 set rtp+=~/.fzf
