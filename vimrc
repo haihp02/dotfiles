@@ -81,7 +81,7 @@ function! OSC52Yank()
   let buffer = "\e]52;c;" . buffer . "\x07"
   silent exe "!echo -ne " . shellescape(buffer) . " > /dev/tty"
 endfunction
-autocmd TextYankPost * call OSC52Yank()
+autocmd TextYankPost * if v:event.operator == 'y' | call OSC52Yank() | endif
 
 " Enable fzf plugin
 set rtp+=~/.fzf
