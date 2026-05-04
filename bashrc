@@ -16,8 +16,15 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=100000
+HISTFILESIZE=100000
+
+# append to history immediately
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+
+# bind the Up and Down arrows to search history based on current input
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.

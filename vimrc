@@ -60,7 +60,9 @@ endif
 
 nmap Q <Nop>
 
-set noerrorbells visualbell t_vb=
+set noerrorbells
+set novisualbell
+set t_vb=
 set mouse=
 
 " Disable Ctrl+Arrow — tmux can accidentally send these, causing unexpected
