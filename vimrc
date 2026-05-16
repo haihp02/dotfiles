@@ -48,6 +48,9 @@ set undodir=~/.vim/undodir
 let g:netrw_liststyle = 3  " Tree-style listing
 let g:netrw_banner    = 0  " Hide the noisy top banner
 let g:netrw_altv      = 1  " Vertical split opens to the right
+let g:netrw_fastbrowse = 2
+" Add line number in netrw
+let g:netrw_bufsettings = 'noma nomod nu rnu nobl nowrap ro'
 
 " FZF — primary file navigation
 nnoremap <leader>e :Files<CR>
