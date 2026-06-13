@@ -75,7 +75,7 @@ if [ "$EDITOR_CHOICE" = "vim" ]; then
   if ! command -v vim &> /dev/null; then
     install_vim
   else
-    VIM_MAJOR=$(vim --version | head -1 | grep -oP 'Vi IMproved \K[0-9]+')
+    VIM_MAJOR=$(vim --version | head -1 | grep -oP 'Vi IMproved \K[0-9]+' || true)
     if [ "${VIM_MAJOR:-0}" -lt 9 ]; then
       echo "Vim ${VIM_MAJOR} is too old (need 8+), upgrading..."
       install_vim
@@ -90,7 +90,7 @@ else
   # parser highlighting) is locked for compatibility with Nvim 0.11.
   # -----------------------
   NVIM_VERSION="0.11.4"
-  NVIM_MAJOR_MINOR=$(nvim --version 2>/dev/null | head -1 | grep -oP '\K[0-9]+\.[0-9]+')
+  NVIM_MAJOR_MINOR=$(nvim --version 2>/dev/null | head -1 | grep -oP '\K[0-9]+\.[0-9]+' || true)
   if [ "$NVIM_MAJOR_MINOR" != "0.11" ]; then
     echo "Installing neovim ${NVIM_VERSION}..."
     ARCH=$(uname -m)
@@ -113,7 +113,7 @@ else
   # tree-sitter-cli). The apt-provided nodejs is too old (v12), so
   # use NodeSource for a current LTS.
   # -----------------------
-  NODE_MAJOR=$(node --version 2>/dev/null | grep -oP '^v\K[0-9]+')
+  NODE_MAJOR=$(node --version 2>/dev/null | grep -oP '^v\K[0-9]+' || true)
   if [ -z "$NODE_MAJOR" ] || [ "$NODE_MAJOR" -lt 18 ]; then
     echo "Installing Node.js (current LTS)..."
     if command -v apt &> /dev/null; then
