@@ -91,7 +91,7 @@ autocmd TextYankPost * if v:event.operator == 'y' | call OSC52Yank() | endif
 " Enable fzf plugin
 set rtp+=~/.fzf
 let $FZF_DEFAULT_COMMAND = 'rg --files'
-let $FZF_DEFAULT_OPTS = '--preview-window=up:50%:hidden'
+let $FZF_DEFAULT_OPTS = '--layout=reverse --preview-window=up:50%:hidden'
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
 command! FilesAll call fzf#vim#files('', {
   \ 'source': 'rg --files --hidden --no-ignore --glob "!.git/*"',
@@ -115,10 +115,6 @@ nnoremap <Left>  :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up>    :echoe "Use k"<CR>
 nnoremap <Down>  :echoe "Use j"<CR>
-inoremap <Left>  <ESC>:echoe "Use h"<CR>
-inoremap <Right> <ESC>:echoe "Use l"<CR>
-inoremap <Up>    <ESC>:echoe "Use k"<CR>
-inoremap <Down>  <ESC>:echoe "Use j"<CR>
 
 " Keep swap files in one place
 if !isdirectory($HOME . '/.vim/swapfiles')
