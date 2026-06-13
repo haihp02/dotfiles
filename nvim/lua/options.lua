@@ -63,3 +63,12 @@ for _, dir in ipairs({ "~/.local/state/nvim/undodir", "~/.local/state/nvim/swapf
     vim.fn.mkdir(path, "p")
   end
 end
+
+-- Send only true yanks (not deletes) to the system clipboard via OSC 52
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    if vim.v.event.operator == "y" then
+      vim.fn.setreg("+", vim.fn.getreg('"'))
+    end
+  end,
+})
