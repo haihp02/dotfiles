@@ -3,11 +3,16 @@ return {
   dependencies = {
     "mason-org/mason.nvim",
     "mason-org/mason-lspconfig.nvim",
+    "saghen/blink.cmp",
   },
   config = function()
     require("mason").setup()
     require("mason-lspconfig").setup({
       ensure_installed = { "pyright", "lua_ls", "bashls", "clangd" },
+    })
+
+    vim.lsp.config("*", {
+      capabilities = require("blink.cmp").get_lsp_capabilities(),
     })
 
     vim.lsp.config("lua_ls", {
