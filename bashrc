@@ -124,3 +124,8 @@ if ! shopt -oq posix; then
 fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# Load machine-specific configurations
+if [ -f ~/.bashrc.local ]; then
+    source ~/.bashrc.local
+fi
