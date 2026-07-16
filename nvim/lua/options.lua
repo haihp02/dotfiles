@@ -46,6 +46,9 @@ opt.mouse = ""
 -- Use a block cursor in all modes (matches vim's terminal default)
 opt.guicursor = "a:block"
 
+--- Highlight cursor line
+opt.cursorline = true
+
 opt.termguicolors = true
 
 -- Netrw
