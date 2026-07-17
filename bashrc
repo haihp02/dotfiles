@@ -42,6 +42,15 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
+# Fall back to a terminfo entry every box has if the outer terminal's isn't
+# installed here (e.g. TERM=xterm-ghostty on a host without the ghostty
+# package — its terminfo entry ships only with that package, not ncurses-term).
+# No-op on machines that already have the entry, so this doesn't touch
+# terminals that already work.
+if ! infocmp "$TERM" >/dev/null 2>&1; then
+    export TERM=xterm-256color
+fi
+
 # set a fancy prompt (non-color, unless the terminal actually supports it)
 # Detect via tput instead of matching $TERM against a fixed pattern list,
 # since terminals like Ghostty (TERM=xterm-ghostty) support color but don't
